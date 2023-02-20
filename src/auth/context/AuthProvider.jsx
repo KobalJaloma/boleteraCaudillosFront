@@ -3,6 +3,8 @@ import { types } from '../types';
 import { AuthContext } from './AuthContext';
 import { authReducer } from "./AuthReducer";
 
+
+
 const init = () => {
     const user = JSON.parse(localStorage.getItem('user'));
   
@@ -15,8 +17,12 @@ const init = () => {
 export const AuthProvider = ({children}) => {
     const [authState, dispatch] = useReducer(authReducer, {}, init);
 
-    const login = (name = '') => {
-      
+    const login = (user = '', password = '') => {
+        
+        
+        
+
+
     }
     const logout = () => {
        
