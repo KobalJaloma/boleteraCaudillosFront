@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from '../../hooks'
+import { AuthContext } from '../context';
+import { ModalTicket } from "../../components/modals";
 
 export const LoginPage = () => {
 
@@ -7,6 +9,39 @@ export const LoginPage = () => {
     username: '',
     password: '',
   });
+
+  const { login } = useContext(AuthContext);
+  const [estatus, setEstatus] = useState(0);
+
+  const sesion = async(username, password) => {
+    if(username != 0 && password != 0) {
+      const state = await login(username, password);
+
+      setEstatus(state);
+    }
+    
+    console.log(estatus);
+  }
+
+  useEffect(() => {
+    authError();
+  }, [estatus]);
+
+
+  //creacion de feedback visual del login
+  const authError = () => {
+    if(estatus == '[fail] usuario') {
+      return(
+        <p className='text-danger'>Usuario no Encontrado</p>
+      )
+    }
+    if(estatus == '[fail] password') {
+      return(
+        <p className='text-danger'>Contrasena Erronea</p>
+      )
+    }
+  }
+
 
   return (
     <div className='d-flex justify-content-center align-items-center bg-dark' style={{height: '100vh'}}>
@@ -16,10 +51,13 @@ export const LoginPage = () => {
           </div>
           <form className='container-fluid f-2'>
             <div className='d-flex flex-column align-items-center'>
+                {
+                  authError()
+                }
                 <div className='mb-3 container-fluid input-group'>
-                  <span className='input-group-text'><i className="bi bi-person-circle"></i></span>
+                  <span className="input-group-text"><i className="bi bi-person-circle"></i></span>
                   <input 
-                    className='form-control'
+                    className={`form-control ${estatus == '[fail] usuario' ? 'border-danger border-3' : ''}`}
                     placeholder='Usuario'
                     name='username'
                     value={username}
@@ -27,9 +65,9 @@ export const LoginPage = () => {
                     />
                 </div>
                 <div className='mb-3 d-flex container-fluid input-group'>
-                  <span className='input-group-text'><i className="bi bi-pass"></i></span>
+                  <span className="input-group-text"><i className="bi bi-pass"></i></span>
                   <input 
-                    className='form-control'
+                    className={`form-control ${estatus == '[fail] password' ? 'border-danger border-3' : ''}`}
                     placeholder='Contraseña'
                     type={'password'}
                     name='password'
@@ -38,7 +76,16 @@ export const LoginPage = () => {
                     /> 
                 </div>
                 <div className='mb-3 d-flex'>
-                  <button type='button' className='btn btn-primary px-5'> Login</button>
+                  <button type='button' className='btn btn-primary px-5'
+                    onClick={()=> sesion(username, password)}
+                  > Login</button>
+                </div>
+                <div className='mb-3 d-flex' style={{alignSelf: 'end'}}>
+                  <ModalTicket />
+                  
+                  {/* <button type='button' className='btn btn-dark px-5'
+                    onClick={() => {}}
+                  > <i class="bi bi-qr-code"></i></button> */}
                 </div>
             </div>
           </form>
