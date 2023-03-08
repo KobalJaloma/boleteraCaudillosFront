@@ -21,6 +21,10 @@ export const Escanear = () => {
   });
 
 
+  useEffect(() => {
+    console.log(idTicket);
+  }, [idTicket]);
+
   const evaluarCodigo = async() => {
     if(idTicket == '') {
       ErrorAlert({text: 'Favor De Escanear Un Codigo'});      

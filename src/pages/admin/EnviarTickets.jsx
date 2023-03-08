@@ -73,7 +73,7 @@ export const EnviarTickets = () => {
                 return;
             }
         });
-
+//leonardo
         //ENVIAR LOS CORREOS MEDIANTE NUESTRA API
         const payload = {
             receptor : receptor, 
@@ -81,7 +81,7 @@ export const EnviarTickets = () => {
             remitente : 'Sistemas Caudillos',
             informacion: `Envio ${enviar} de el juego ${evento.nombre}, su numero de telefono es ${telefono}`,
             asunto: 'Tickets de Caudillo',
-            html: htmlProv
+            html: '<p>hola mundo</p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAALRSURBVO3BQY7cWAwFwXyE7n/ldO+Gqw8IUtW4aUbEH6wxijVKsUYp1ijFGqVYoxRrlGKNUqxRijVKsUYp1ijFGqVYoxRrlGKNcvFQEr5J5SQJJypdEjqVLgnfpPJEsUYp1ijFGuXiZSpvSsJJEk5UuiR0KneovCkJbyrWKMUapVijXHxYEu5QuUOlS0KXhE7lTUm4Q+WTijVKsUYp1igX/7gkdCq/WbFGKdYoxRrl4pdLwvpPsUYp1ijFGuXiw1Q+SeX/pPI3KdYoxRqlWKNcvCwJ35SETqVLQqfyRBL+ZsUapVijFGuU+INBkvCEym9WrFGKNUqxRrl4KAmdSpeETqVLQqfSJaFTOVE5SUKn8kQSOpWTJHQqbyrWKMUapVijxB98URJOVO5IwonKE0noVO5IQqfSJaFTeaJYoxRrlGKNcvFQEk5U7kjCiUqn8kQSOpVO5SQJJyrfVKxRijVKsUa5eJnKicoTSehUnlA5SUKn0ql0SThJQqfypmKNUqxRijXKxYcl4Q6VLgmdSpeEO1S6JHQqdyThJAmdSpeETuWJYo1SrFGKNUr8wS+WhBOVLgmdSpeETqVLQqfSJaFT6ZLQqbypWKMUa5RijRJ/8EASvknlJAl3qHRJuEPlJAl3qDxRrFGKNUqxRrl4mcqbkvCESpeELgknKl0SuiScqHRJ+KRijVKsUYo1ysWHJeEOlTuS0Kl0SThR6ZLQJeFE5SQJnUqXhDcVa5RijVKsUS5+OZUuCZ3KHSpdEt6UhE7lTcUapVijFGuUi18uCZ3KHUnoVDqVkyR0KicqXRI6lSeKNUqxRinWKBcfpvJJKk+onCShU7lDpUtCp/KmYo1SrFGKNcrFy5LwTUk4UTlJQqdyh0qXhE7lJAmdyhPFGqVYoxRrlPiDNUaxRinWKMUapVijFGuUYo1SrFGKNUqxRinWKMUapVijFGuUYo1SrFH+AAuxKeQH/BwtAAAAAElFTkSuQmCC"></img>'
         }
         const response = await newPost(uri.enviarCorreo, payload);
 
@@ -101,6 +101,7 @@ export const EnviarTickets = () => {
             telefono: telefono,
             correo: correo + "@" + correoDirec,
             tickets: `${sendTicketsId}`,
+            html: '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQA…ymCmHmXKYKYeZcpgp/wNz7o4y7pfLeAAAAABJRU5ErkJggg==" />'
         }
         const reportesPost = await newPost(uri.ticketsEnviosReportes, ReportePayload);
 

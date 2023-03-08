@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
-import { useAxios } from '../../hooks';
+import { newPost, newGet } from "../../helpers";
 import { TicketsPdf } from "../../pdf";
-import { PDFViewer } from "@react-pdf/renderer";
+import ReactPDF, { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
+
 
 const usuariosUri = 'http://localhost:8000/api/usuarios';
 
+const uri = {
+  crearqr: 'http://localhost:8000/api/generarQr/png',
+  ticketsbyEvento: 'http://localhost:8000/api/tickets/evento/' //se agrega el id del evento como param
+}
+
+
 export const Reportes = () => {
-
-
+  
   return (
     <div>
-      <PDFViewer style={{width: "100vw", height: '100vh'}}>
-        <TicketsPdf 
-          informacion={'hola mamones'}
-          ticket={'caudillosVsGalgos'}
-        />
-      </PDFViewer>
+      <img id='test' src=""></img>
+      {
+       <PDFViewer style={{width: '30rem', height: '30rem'}}>
+            
+          <TicketsPdf ticket={'caudillosVsGalgos'} qr={qr}/>
+            
+        </PDFViewer>
+      }
+      <button className='btn btn-secondary' onClick={() => downloadCanvas('test', 'test.png')}>Descargar</button>
     </div>
   )
 }
+
+
