@@ -6,8 +6,8 @@ import { AuthContext } from '../../auth/context';
 
 //Peticiones recurrentes en esta pantalla
 const api = {
-  eventos : "http://localhost:8000/api/eventos",
-  tickets: "http://localhost:8000/api/tickets"
+  eventos : "http://35.88.32.212:8000/api/eventos",
+  tickets: "http://35.88.32.212:8000/api/tickets"
 }
 
 export const Tickets = () => {

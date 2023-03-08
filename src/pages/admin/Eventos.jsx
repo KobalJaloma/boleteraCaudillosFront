@@ -3,7 +3,10 @@ import { NavBar, ModalTableFilter, alert} from '../../components';
 import { useForm, useAxios } from "../../hooks";
 import { newPost } from "../../helpers";
 
-
+const uri = {
+    recintos: 'http://35.88.32.212:8000/api/recintos',
+    eventos: 'http://35.88.32.212:8000/api/eventos'
+}
 
 export const Eventos = () => {
     
@@ -13,7 +16,7 @@ export const Eventos = () => {
         fecha: "",
         recinto: {}
     });
-    const { data } = useAxios("http://localhost:8000/api/recintos", "get");
+    const { data } = useAxios(uri.recintos, "get");
 
     const saveEvento = async() => {
         if(recinto == "" || evento == "" || hora == "" || fecha == "") {
@@ -31,7 +34,7 @@ export const Eventos = () => {
             fk_recinto: recinto.id,
             estatus: 1
         }
-        const datos = await newPost("http://localhost:8000/api/eventos", payload);
+        const datos = await newPost(uri.eventos, payload);
 
         if(datos.estatus != "OK") {
             console.log(datos);

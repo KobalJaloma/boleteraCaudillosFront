@@ -5,8 +5,8 @@ import { newGet, newPut, newPost } from "../../helpers";
 import { AuthContext } from '../../auth/context/AuthContext';
 
 const uri = {
-    ticket: 'http://localhost:8000/api/tickets/ticket', //debe llevar un codigo
-    quemarTicket: 'http://localhost:8000/api/tickets/quemarTicket'//es un update
+    ticket: 'http://35.88.32.212:8000/api/tickets/ticket', //debe llevar un codigo
+    quemarTicket: 'http://35.88.32.212:8000/api/tickets/quemarTicket'//es un update
 }
 
 

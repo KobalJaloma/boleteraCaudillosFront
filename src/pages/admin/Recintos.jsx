@@ -3,7 +3,12 @@ import { NavBar, ModalTable, ModalTableFilter, ErrorAlert, SuccessAlert } from '
 import { useForm, useAxios } from '../../hooks'
 import { newPost } from "../../helpers";
 
-const urlPost = "http://localhost:8000/api/recintos";
+
+const uri = {
+    usuarios: 'http://35.88.32.212:8000/api/usuarios',
+    api: 'http://35.88.32.212:8000/api/',
+    recintos: 'http://35.88.32.212:8000/api/recintos'
+}
 
 export const Recintos = () => {
 
@@ -19,12 +24,12 @@ export const Recintos = () => {
         pais : {}
     });
 
-    const [url, setUrl] = useState('http://localhost:8000/api/usuarios');
+    const [url, setUrl] = useState(uri.usuarios);
     const { data } = useAxios(url);
 
     //HARA QUE CAMBIE LA PETICION HTTP AL SERVIDOR
     const changeUrl = (url) => {
-        const URI = `http://localhost:8000/api/${url}`;
+        const URI = `${uri.api}${url}`;
 
         if(url == null || url == undefined || url == "") {
             console.log("URL No Valida");
@@ -52,7 +57,7 @@ export const Recintos = () => {
             pais : pais.id,
         }
         
-        const data = newPost(urlPost, payload);
+        const data = newPost(uri.recintos, payload);
         if(data.estatus == 'Fail') {
             ErrorAlert({text: data.message});
             return null;

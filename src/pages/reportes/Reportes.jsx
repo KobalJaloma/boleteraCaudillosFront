@@ -4,11 +4,11 @@ import { TicketsPdf } from "../../pdf";
 import ReactPDF, { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
 
 
-const usuariosUri = 'http://localhost:8000/api/usuarios';
+const usuariosUri = 'http://35.88.32.212:8000/api/usuarios';
 
 const uri = {
-  crearqr: 'http://localhost:8000/api/generarQr/png',
-  ticketsbyEvento: 'http://localhost:8000/api/tickets/evento/' //se agrega el id del evento como param
+  crearqr: 'http://35.88.32.212:8000/api/generarQr/png',
+  ticketsbyEvento: 'http://35.88.32.212:8000/api/tickets/evento/' //se agrega el id del evento como param
 }
 
 

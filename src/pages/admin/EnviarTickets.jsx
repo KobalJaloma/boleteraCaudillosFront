@@ -4,12 +4,12 @@ import { useForm, useAxios } from "../../hooks";
 import { newGet, newPost, newPut } from '../../helpers'
 
 const uri = {
-    eventos: 'http://localhost:8000/api/eventos',
-    ticketsEnvios: 'http://localhost:8000/api/tickets/envios/',
-    ticketsEstatus: 'http://localhost:8000/api/tickets/envios/actualizarEstado',
-    ticketsEnviosReportes: 'http://localhost:8000/api/ticketsEnvios',
-    enviarCorreo: 'http://localhost:8000/api/email',
-    qr: 'http://localhost:8000/api/generarQr'
+    eventos: 'http://35.88.32.212:8000/api/eventos',
+    ticketsEnvios: 'http://35.88.32.212:8000/api/tickets/envios/',
+    ticketsEstatus: 'http://35.88.32.212:8000/api/tickets/envios/actualizarEstado',
+    ticketsEnviosReportes: 'http://35.88.32.212:8000/api/ticketsEnvios',
+    enviarCorreo: 'http://35.88.32.212:8000/api/email',
+    qr: 'http://35.88.32.212:8000/api/generarQr'
 }
 
 export const EnviarTickets = () => {

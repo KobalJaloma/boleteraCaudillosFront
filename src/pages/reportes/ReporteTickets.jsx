@@ -4,8 +4,8 @@ import { useForm, useAxios } from "../../hooks";
 import { newGet } from '../../helpers'
 
 const uri = {
-    eventos : 'http://localhost:8000/api/eventos',
-    envios : 'http://localhost:8000/api/reportes/ticketEnvios/'
+    eventos : 'http://35.88.32.212:8000/api/eventos',
+    envios : 'http://35.88.32.212:8000/api/reportes/ticketEnvios/'
 }
 
 export const ReporteTickets = () => {
