@@ -6,8 +6,8 @@ import { AuthContext } from './AuthContext';
 import { authReducer } from "./AuthReducer";
 import axios from 'axios';
 
-
-const url = 'http://localhost:8000/api/usuarios';
+const env = import.meta.env;
+const url = `${env.VITE_REACT_API_ROUTE}api/usuarios`;
 
 //retornos para dar feedback visual en la parte de login
 const failLoggedTypes = {

@@ -1,1 +1,1 @@
-export { alert, ErrorAlert, SuccessAlert } from './alert';
+export { alert, ErrorAlert, SuccessAlert, ErrorAlertShortTime, SuccessAlertShortTime } from './alert';

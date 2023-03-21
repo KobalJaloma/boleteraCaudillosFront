@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Tickets, Usuarios, Eventos, Recintos, EnviarTickets} from './admin';
 import { Escanear } from './modulos';
-import { Reportes, ReporteTickets } from './reportes';
+import { Reportes, ReporteTickets, ReporteEscaneo } from './reportes';
 import { Home } from './Home';
 
 export const HomeRoutes = () => {
@@ -19,6 +19,7 @@ export const HomeRoutes = () => {
 
         {/* Rutas de reportes */}
         <Route path='/reporteTickets' element={<ReporteTickets/>}/>
+        <Route path='/reporteEscaneo' element={<ReporteEscaneo/>}/>
         <Route path='/reportes' element={<Reportes/>} />
 
         {/* rutas de administracion */}

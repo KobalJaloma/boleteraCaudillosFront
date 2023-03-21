@@ -2,10 +2,12 @@ import React, {useState} from 'react'
 import { NavBar, ModalTableFilter, alert} from '../../components';
 import { useForm, useAxios } from "../../hooks";
 import { newPost } from "../../helpers";
+//variable de estado
+const env = import.meta.env;
 
 const uri = {
-    recintos: 'http://35.88.32.212:8000/api/recintos',
-    eventos: 'http://35.88.32.212:8000/api/eventos'
+    recintos: `${env.VITE_REACT_API_ROUTE}api/recintos`,
+    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos`
 }
 
 export const Eventos = () => {

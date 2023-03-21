@@ -8,23 +8,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E4E4E4'
   },
   section: {
     margin: 10,
     padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center'
+    
   },
   ticket: {
-    width: '500px'
+    width: '120px',
+    height: '170px'
   },
   QrContainer: {
     position: 'absolute',
-    bottom: "70px",
-    left: "180x",
+    bottom: "20px",
+    left: "45x",
     backgroundColor: '#E4E4E4',
     
-    width: "125px",
-    height: '125px'
+    width: "30px",
+    height: '30px'
   },
   qrImage:{
     width: "100%",
@@ -32,6 +38,7 @@ const styles = StyleSheet.create({
   },
   non: {
     margin: 0,
+    marginBottom: '10px',
     padding: 0
   }
 });
@@ -39,12 +46,12 @@ const styles = StyleSheet.create({
 
 // Create Document Component
 export const TicketsPdf = ({ticket, qr = []}) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
+  <Document >
+    <Page size="A4" style={styles.page} orientation='landscape'>
       <View style={styles.section}>
         {
           qr.map((codigo) => (<View key={codigo} style={styles.non}>
-            <Image src={`layoutTickets/${ticket}.jpeg`} style={styles.ticket}/>
+            <Image src={`layoutTickets/${ticket}`} style={styles.ticket}/>
             <View style={styles.QrContainer}>
               <Image style={styles.qrImage} src={codigo} />
             </View>

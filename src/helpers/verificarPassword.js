@@ -1,5 +1,6 @@
 import axios from 'axios';
-const url = 'http://localhost:8000/api/usuarios/validate';
+const env = import.meta.env;
+const url = `${env.VITE_REACT_API_ROUTE}api/usuarios/validate`;
 
 export const verificarPassword = async(usuario) => {
 

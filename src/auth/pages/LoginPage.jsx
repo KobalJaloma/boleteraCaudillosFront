@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from '../../hooks'
 import { AuthContext } from '../context';
 import { ModalTicket } from "../../components/modals";
-
 export const LoginPage = () => {
 
-  const {formState, onInputChange, onResetForm , password, username} = useForm({
+  const {formState, onInputChange, onResetForm , setFormState ,password, username} = useForm({
     username: '',
     password: '',
   });
@@ -42,10 +41,25 @@ export const LoginPage = () => {
     }
   }
 
+  //PROVISIONAL
+  const cambiarUsuario = (usuario) => {
+      setFormState({
+        ...formState,
+        username: usuario,
+        password: usuario
+      });
+      sesion(username, password)
+  }
 
   return (
-    <div className='d-flex justify-content-center align-items-center bg-dark' style={{height: '100vh'}}>
-      <div className='container bg-white py-5 rounded' style={{maxWidth: '40rem'}}>
+    <div className='d-flex justify-content-center align-items-center' 
+      style={{
+        height: '100vh', 
+        backgroundImage: 'url("wallpapers/fondo-login2.jpg")', 
+       
+      }}
+    >
+      <div className='container py-5 rounded bg-white' style={{maxWidth: '40rem'}}>
           <div className='container-sm d-flex justify-content-center mb-4' >
             <img src='logos/Caudillo.png' className='img-fluid mb-4' style={{width: '80%'}}/>
           </div>
@@ -80,12 +94,27 @@ export const LoginPage = () => {
                     onClick={()=> sesion(username, password)}
                   > Login</button>
                 </div>
-                <div className='mb-3 d-flex' style={{alignSelf: 'end'}}>
-                  <ModalTicket />
+                <div className='mb-3 d-flex justify-content-center' style={{alignSelf: 'center', width: '100%'}}>
+                  {/* <ModalTicket /> */}
                   
                   {/* <button type='button' className='btn btn-dark px-5'
                     onClick={() => {}}
                   > <i class="bi bi-qr-code"></i></button> */}
+                  {/* PARCHE PARA USAURIOS */}
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('1')} type="button">Usuario 1</button>
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('2')} type="button">Usuario 2</button>
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('3')} type="button">Usuario 3</button>
+                </div>
+                <div className='mb-3 d-flex justify-content-center' style={{alignSelf: 'center', width: '100%'}}>
+                  {/* <ModalTicket /> */}
+                  
+                  {/* <button type='button' className='btn btn-dark px-5'
+                    onClick={() => {}}
+                  > <i class="bi bi-qr-code"></i></button> */}
+                  {/* PARCHE PARA USAURIOS */}
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('4')} type="button">Usuario 4</button>
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('5')} type="button">Usuario 5</button>
+                  <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('6')} type="button">Usuario 6</button>
                 </div>
             </div>
           </form>

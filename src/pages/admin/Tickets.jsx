@@ -4,10 +4,11 @@ import { useAxios, useForm } from '../../hooks';
 import { newPost } from "../../helpers";
 import { AuthContext } from '../../auth/context';
 
+const env = import.meta.env;
 //Peticiones recurrentes en esta pantalla
 const api = {
-  eventos : "http://35.88.32.212:8000/api/eventos",
-  tickets: "http://35.88.32.212:8000/api/tickets"
+  eventos : `${env.VITE_REACT_API_ROUTE}api/eventos`,
+  tickets: `${env.VITE_REACT_API_ROUTE}api/tickets`
 }
 
 export const Tickets = () => {

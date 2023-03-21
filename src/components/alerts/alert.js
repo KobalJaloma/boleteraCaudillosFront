@@ -16,7 +16,16 @@ export const ErrorAlert = (alert = initAlert) => {
     swal({
         ...alert,
         icon: 'warning',
-        title: 'UPPS'
+        title: 'UPPS',
+    });
+}
+export const ErrorAlertShortTime = (alert = initAlert, onExit) => {
+    swal({
+        ...alert,
+        icon: 'warning',
+        title: 'UPPS',
+        buttons: false,
+        timer: 2000
     });
 }
 
@@ -25,6 +34,16 @@ export const SuccessAlert = (alert = initAlert) => {
         ...alert,
         icon: 'success',
         title: 'Excelente'
+    });
+}
+
+export const SuccessAlertShortTime = (alert = initAlert) => {
+    swal({
+        ...alert,
+        icon: 'success',
+        title: 'Excelente',
+        buttons: false,
+        timer: 2000
     });
 }
 

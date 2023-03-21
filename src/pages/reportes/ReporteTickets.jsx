@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { NavBar, ModalTableFilter, ErrorAlert, SuccessAlert } from '../../components';
+import { NavBar, ModalTableFilter, ErrorAlert, SuccessAlert, GraficaPastel, GraficaLineas } from '../../components';
 import { useForm, useAxios } from "../../hooks";
 import { newGet } from '../../helpers'
 
+const env = import.meta.env;
 const uri = {
-    eventos : 'http://35.88.32.212:8000/api/eventos',
-    envios : 'http://35.88.32.212:8000/api/reportes/ticketEnvios/'
+    eventos : `${env.VITE_REACT_API_ROUTE}api/eventos`,
+    envios : `${env.VITE_REACT_API_ROUTE}api/reportes/ticketEnvios/`
 }
 
 export const ReporteTickets = () => {
@@ -86,6 +87,13 @@ export const ReporteTickets = () => {
                 }
                 </div>
             </div>
+            <GraficaPastel 
+                
+            />
+            <GraficaLineas 
+                columnas={['una columnas', 'dos columnas']}
+                datos={[{data: [15,50], nombre: 'fernando'},{data: [30,20], nombre: 'Leonardo'}]}
+            />
         </div>
     </div>
   )

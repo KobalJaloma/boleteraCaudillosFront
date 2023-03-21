@@ -3,12 +3,12 @@ import { NavBar, ErrorAlert, SuccessAlert , ModalTableFilter} from "../../compon
 import { useForm, useAxios } from "../../hooks";
 import { newUsuario, newPut } from "../../helpers";
 
-const usuarioUrl = 'http://localhost:8000/usuarios';
-
+const env = import.meta.env;
+console.log(env);
 const URIS = {
-  usuario: 'http://35.88.32.212:8000/api/usuarios',
-  permisos: 'http://35.88.32.212:8000/api/permisos',
-  updatePermisos: 'http://35.88.32.212:8000/api/usuarios/permisos'
+  usuario: `${env.VITE_REACT_API_ROUTE}api/usuarios`,
+  permisos: `${env.VITE_REACT_API_ROUTE}api/permisos`,
+  updatePermisos: `${env.VITE_REACT_API_ROUTE}api/usuarios/permisos`
 }
 
 export const Usuarios = () => {
@@ -30,7 +30,7 @@ export const Usuarios = () => {
       return;
     }
 
-    const response = newUsuario('http://localhost:8000/api/usuarios', {
+    const response = newUsuario(URIS.usuario, {
       "nombreUsuario" : usuario,
       "nombre" : nombre,
       "password" : password,

@@ -3,13 +3,14 @@ import { NavBar, ModalTableFilter, SuccessAlert, ErrorAlert } from "../../compon
 import { useForm, useAxios } from "../../hooks";
 import { newGet, newPost, newPut } from '../../helpers'
 
+const env = import.meta.env;
 const uri = {
-    eventos: 'http://35.88.32.212:8000/api/eventos',
-    ticketsEnvios: 'http://35.88.32.212:8000/api/tickets/envios/',
-    ticketsEstatus: 'http://35.88.32.212:8000/api/tickets/envios/actualizarEstado',
-    ticketsEnviosReportes: 'http://35.88.32.212:8000/api/ticketsEnvios',
-    enviarCorreo: 'http://35.88.32.212:8000/api/email',
-    qr: 'http://35.88.32.212:8000/api/generarQr'
+    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos`,
+    ticketsEnvios: `${env.VITE_REACT_API_ROUTE}api/tickets/envios/disponibles/`,
+    ticketsEstatus: `${env.VITE_REACT_API_ROUTE}api/tickets/envios/actualizarEstado`,
+    ticketsEnviosReportes: `${env.VITE_REACT_API_ROUTE}api/ticketsEnvios`,
+    enviarCorreo: `${env.VITE_REACT_API_ROUTE}api/email`,
+    qr: `${env.VITE_REACT_API_ROUTE}api/generarQr`
 }
 
 export const EnviarTickets = () => {
@@ -20,7 +21,7 @@ export const EnviarTickets = () => {
     const { formState, onInputChange, onResetForm, receptor, correo, telefono,  evento, correoDirec, enviar} = useForm({
         receptor: '',
         correo: '',
-        correoDirec: '',
+        correoDirec: 'gmail.com',
         telefono: '',
         enviar: 0,
         evento: {id: ''}, 
@@ -121,6 +122,15 @@ export const EnviarTickets = () => {
         getTickets();
     }
 
+    const changeCorreoDirec = (value) => {
+        onInputChange({
+            target: {
+                name: 'correoDirec',
+                value: value
+            }
+        });
+    }
+
     useEffect(() => {
         getTickets();
     }, [evento]);
@@ -162,7 +172,16 @@ export const EnviarTickets = () => {
                                 placeholder='gmail.com'
                                 value={correoDirec}
                                 onChange={onInputChange}
+                                disabled
                             />
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                                <ul class="dropdown-menu">
+                                    <li><div class="dropdown-item" onClick={() => changeCorreoDirec('gmail.com')}>gmail.com</div></li>
+                                    <li><div class="dropdown-item" onClick={() => changeCorreoDirec('hotmail.com')}>hotmail.com</div></li>
+                                    <li><div class="dropdown-item" onClick={() => changeCorreoDirec('outlook.com')}>outlook.com</div></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div className='col-6 col-md-3'>

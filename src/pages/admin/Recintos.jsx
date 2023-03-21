@@ -3,11 +3,12 @@ import { NavBar, ModalTable, ModalTableFilter, ErrorAlert, SuccessAlert } from '
 import { useForm, useAxios } from '../../hooks'
 import { newPost } from "../../helpers";
 
+const env = import.meta.env;
 
 const uri = {
-    usuarios: 'http://35.88.32.212:8000/api/usuarios',
-    api: 'http://35.88.32.212:8000/api/',
-    recintos: 'http://35.88.32.212:8000/api/recintos'
+    usuarios: `${env.VITE_REACT_API_ROUTE}api/usuarios`,
+    api: `${env.VITE_REACT_API_ROUTE}api/`,
+    recintos: `${env.VITE_REACT_API_ROUTE}api/recintos`
 }
 
 export const Recintos = () => {
