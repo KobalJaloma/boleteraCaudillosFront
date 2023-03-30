@@ -52,10 +52,10 @@ export const LoginPage = () => {
   }
 
   return (
-    <div className='d-flex justify-content-center align-items-center' 
+    <div className='d-flex justify-content-center align-items-center gradient-bg-animation' 
       style={{
         height: '100vh', 
-        backgroundImage: 'url("wallpapers/fondo-login2.jpg")', 
+       
        
       }}
     >

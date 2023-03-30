@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar, ModalTableFilter } from "../../components";
+import { NavBar, ModalTableFilter, Excel, ErrorAlert } from "../../components";
 import { useForm, useAxios } from '../../hooks';
 import { newGet } from "../../helpers";
 
@@ -7,7 +7,7 @@ import { newGet } from "../../helpers";
 const env = import.meta.env;
 
 const uri = {
-    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos`,
+    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos?atributos=nombre,id`,
     usuariosByTickets: `${env.VITE_REACT_API_ROUTE}api/tickets/escaneado?` //params
 }
 
@@ -15,30 +15,43 @@ export const ReporteEscaneo = () => {
     
     const {data, isLoading} = useAxios(uri.eventos, 'get');
 
-    const {formState,  onInputChange, onResetForm, evento, reportes} = useForm({
+    const {formState,  onInputChange, onResetForm, handleChangeValueObject ,evento, reportes} = useForm({
         evento: {id: '', nombre: ''},
-        reportes: {id: ''}
+        reportes: []
     });
     
     const getReporte = async() => {
         const atributos = ['codigo', 'fk_usuarioEscaneado', 'updatedAt'];
         const atributosStr = `${atributos}`;
+        const registros = await newGet(`${uri.usuariosByTickets}atributos=${atributos}&evento=${evento.id}`);
+        console.log(`${uri.usuariosByTickets}atributos=${atributos}&evento=${evento.id}`);
+        if(registros == '') {
+            handleChangeValueObject('reportes', [""]);
+            ErrorAlert({text: "No Se Encontraron Registros Sobre Este Reporte"})
+            return;
+        }
 
-        const registros = await newGet(`${uri.usuariosByTickets}atributos=${atributos}$evento=${evento.id}`);
-        
+        onInputChange({
+            target: {
+                name: 'reportes',
+                value: registros
+            }
+        });
+        console.log(registros);
     }
 
     return (
-    <div className='container-fluid p-0 bg-dark' style={{height: '100vh'}}>
+    <div className='container-fluid p-0 wallpaper-gradiant-blue' style={{height: '100vh'}}>
         <NavBar/>
         <div className='container-lg d-flex justify-content-center flex-column mt-5'>
-            <div className='container-fluid bg-light mb-3 p-5 rounded'>
+            <div className='container-fluid bg-light mb-3    p-5 rounded'>
                <h1 className='mb-3'> <i className="bi bi-calendar-event"/> Reporte De Escaneo Por Evento</h1>
                 <div className='d-flex flex-column justify-content-center'>
                     <div className='row g-0 text-center mb-3'>
                         <div className='col-sm-6 col-md-12 mb-3'>
                             <div className='container input-group'>
                             <ModalTableFilter
+                                titulo='Eventos'
                                 target='m_eventos'
                                 registros={data}
                                 onClickRow={(registro) => onInputChange({
@@ -57,16 +70,24 @@ export const ReporteEscaneo = () => {
                             />
                             </div>
                         </div>
+                        <div className='col-sm-6 col-md-12'>
+                            <div className="d-flex justify-content-end">
+                                <button className='btn btn-dark' onClick={getReporte}>Traer Reporte</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button onClick={getReporte}>TEST</button>
-            <div className='container-fluid bg-warning mb-5 p-3 rounded'>
+            <div className="container-lg d-flex justify-content-center">
+
+            </div>
+            <div className={`container-fluid mb-5 p-3 rounded overflow-auto ${reportes != '' ? 'bg-white':''}`}  style={{maxHeight: '30rem'}}>
                 {
-                    reportes.id == ''
+                    reportes == ''
                     ? <></>
-                    : <TableHelper reportes={reportes}/> 
+                    : <Excel datos={reportes} config={{btnColor: 'primary'}} encabezados={['llaves', 'papel', 'ayer']}/>
                 }
+                
             </div>
         </div>      
     </div>
@@ -92,13 +113,13 @@ const TableHelper = ({reportes}) => {
     
     
     return(
-        <div className='container'>
+        <div className='container bg-white'>
             <table className='table'>
                 <thead>
                     <tr>
                         {
                             columns.map(registros => (
-                                <th>{registros}</th>
+                                <th key={registros}>{registros}</th>
                             ))
                         }
                     </tr>

@@ -47,6 +47,8 @@ export const NavBar = React.memo(() => {
                         Reportes
                         </a>
                         <ul className="dropdown-menu">
+                            <li><h6 className="ms-2 text-warning">Reportes</h6></li>
+                            <li><hr className="dropdown-divider" /></li>
                             <NavLink className="dropdown-item text-black" to="/reporteTickets" style={{background: "white"}}>Reporte De Tickets</NavLink>
                             <NavLink className="dropdown-item text-black" to="/reporteEscaneo" style={{background: "white"}}>Reporte De Escaneos</NavLink>
                             <NavLink className="dropdown-item text-black" to="/reportes" style={{background: "white"}}>Recintos</NavLink>
@@ -62,6 +64,7 @@ export const NavBar = React.memo(() => {
                             <li><hr className="dropdown-divider" /></li>
                             <NavLink className="dropdown-item text-black" to="/CreacionEventos" style={{background: "white"}}>Eventos</NavLink>
                             <NavLink className="dropdown-item text-black" to="/CreacionRecintos" style={{background: "white"}}>Recintos</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/CreacionEmpresas" style={{background: "white"}}>Empresas</NavLink>
                             <NavLink className="dropdown-item text-black" to="/usuarios" style={{background: "white"}}>Usuarios</NavLink>
                         </ul>
                     </li>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "../../hooks";
 
 const initConfig = {
@@ -11,9 +11,8 @@ const initConfig = {
 const initToDo = () => {};
 const initOnClickRow = (inputValue) => {};
  
-export const ModalTableFilter = ({titulo = '', target = '', registros = [], config = initConfig, toDo = initToDo, onClickRow = initOnClickRow}) => {
+export const ModalTableFilter = ({titulo = '', target = '', registros = [], config = initConfig, toDo = initToDo, onClickRow = initOnClickRow, habilitar = true}) => {
     let encabezado = [];
-
     //ACTUALIZAR LOS VALORES DE CONFIGURACION CON LOS NUEVOS INGRESADOS
     const configProv = config;
     config = {
@@ -44,15 +43,20 @@ export const ModalTableFilter = ({titulo = '', target = '', registros = [], conf
     }
 
     //FOMRULARIO DEL FILTER
-    const {formState, onInputChange, onResetForm, setFormState, filter, informacion} = useForm({
+    const {formState, onInputChange, onResetForm, setFormState, filter, informacion, habilitado} = useForm({
         filter: '',
-        informacion : registros
+        informacion : registros,
+        habilitado: habilitar
     });
 
     //HACER RENDERIZADO CADA QUE SE ACTUALIZA
     useEffect(() => {
         filtrarResultados();
     }, [filter, registros]);
+
+    useEffect(() => {
+        onInputChange({target: {name: 'habilitado', value: habilitar}});
+    }, [habilitar]);
 
     const filtrarResultados = () => {
         if(config.filterBy == "nombre"){
@@ -101,7 +105,7 @@ export const ModalTableFilter = ({titulo = '', target = '', registros = [], conf
         data-bs-target={`#${target}`} 
         aria-disabled="true"
         onClick={toDo}
-        
+        disabled={!habilitado}
     >
         <i className={`bi bi-search`}></i>
     </button> 

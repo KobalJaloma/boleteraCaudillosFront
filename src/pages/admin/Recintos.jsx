@@ -68,7 +68,7 @@ export const Recintos = () => {
     }
 
   return (
-    <div className='container-fluid p-0 bg-dark' style={{width: '100vw', height: '100vh'}}>
+    <div className='container-fluid p-0 wallpaper-gradiant-red' style={{width: '100vw', height: '100vh'}}>
         <NavBar />
 
         <div className='container-fluid d-flex flex-column justify-content-center mt-5'>

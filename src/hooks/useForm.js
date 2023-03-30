@@ -17,13 +17,23 @@ export const useForm = ( initialForm = {}) => {
     const onResetForm = () => {
         setFormState(initialForm);
     }
+
+    const handleChangeValueObject = (target = "", value = "") => {
+        onInputChange({
+            target: {
+                name: target,
+                value: value
+            }
+        });
+    }
   
     return {
         ...formState,
         formState,
         onInputChange,
         onResetForm,
-        setFormState
+        setFormState,
+        handleChangeValueObject
     }
     
 }

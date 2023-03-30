@@ -22,13 +22,12 @@ const traerqr = async() => {
   console.log(arr);
 } 
 
-const tickets = [
-  
-]
+const tickets = []
 
 
 
-const qr =  [   ]
+
+const qr =  [];
 
 
 export const Reportes = () => {
@@ -40,7 +39,7 @@ export const Reportes = () => {
       {
        <PDFViewer style={{width: '30rem', height: '30rem'}}>
             
-          <TicketsPdf ticket={'CaudillosVSReds.jpeg'} qr={qr}/>
+          <TicketsPdf ticket={'CaudillosVsDinos.png'} qr={qr}/>
             
         </PDFViewer>
       }

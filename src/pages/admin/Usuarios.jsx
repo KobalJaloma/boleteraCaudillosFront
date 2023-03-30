@@ -68,7 +68,7 @@ export const Usuarios = () => {
   }
 
   return (
-    <div className='container-fluid bg-dark p-0' style={{height: '100%'}}>
+    <div className='container-fluid bg-dark p-0' style={{height: '100vh'}}>
         <NavBar/>
 
         <div className='container-fluid d-flex flex-column justify-content-center mt-5'>
