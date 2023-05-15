@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Page, Text, View, Document, StyleSheet, Image, Svg } from '@react-pdf/renderer';
 // Create styles
 const styles = StyleSheet.create({
@@ -55,27 +55,54 @@ const styles = StyleSheet.create({
   },
   numTicket: {
     textAlign: 'left',
-    fontSize: '5px',
+    fontSize: '8px',
     color: 'red'
   }
 });
+
+const formatoCodigos = (num) => {
+  const strNum = num.toString();
+  
+  var cod = ''
+  if(num < 10) {
+    cod = `0000${num}`;
+    return cod;
+  }
+  if(num < 100) {
+    cod = `000${num}`;
+    return cod;
+  }
+  if(num < 1000) {
+    cod = `00${num}`;
+    return cod;
+  }
+  if(num < 10000) {
+    cod = `0${num}`;
+    return cod;
+  }
+  if(num < 100000) {
+    cod = num;
+    return cod;
+  }
+}
+
+
 var i = 0;
 
 // Create Document Component
-export const TicketsPdf = ({ticket, qr = []}) => (
+export const TicketsPdf = ({ticket, qr = [], inicioIndex = 0}) => (
   <Document >
     <Page size={'SRA3'} style={styles.page} orientation='landscape'>
       <View style={styles.section}>
         {
-          qr.map((codigo) => {
-            i++;
+          qr.map((codigo, index) => {
             return (<View key={codigo} style={styles.non}>
             <Image src={`layoutTickets/${ticket}`} style={styles.ticket}/>
             <View style={styles.QrContainer}>
               <Image style={styles.qrImage} src={codigo} />
             </View>
             <View style={styles.numContainer}>
-              <Text style={styles.numTicket}>{`#${i}`}</Text>
+              <Text style={styles.numTicket}>{`#${formatoCodigos((index + 1) + parseInt(inicioIndex) )}`}</Text>
             </View>
           </View>
           )})

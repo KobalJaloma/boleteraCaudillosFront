@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavBar, ModalTableFilter } from "../../components";
+import { NavBar, ModalTableFilter, SuccessAlert, ErrorAlert } from "../../components";
 import { useForm, useAxios } from "../../hooks";
 import { newPost } from "../../helpers";
 
@@ -58,9 +58,30 @@ export const Empresas = () => {
             rfc: rfc,
             ciudad: ciudad.id
         }
+
+        //validar si el rfc cuenta con los caracteres necesario para una persona fisica o moral
+        if(rfc.length > 13 || rfc.length < 12 ){
+            console.log(rfc.length);
+            ErrorAlert({text: 'Su RFC no es valido ya que no cuenta con el numero necesario de caracteres estipulado por el SAT, verifique su RFC ingresado.'})
+            return;
+        }
+
+        //Guardar en la DB
         const empresaRes = await newPost(uri.empresas, payload);
 
-        console.log(empresaRes);
+        if(!empresaRes) {
+            ErrorAlert({text: 'Hubo un fallo al guardar su empresa'})
+            return; 
+        }
+
+        if(empresaRes.estatus == 'FAIL') {
+            ErrorAlert({text: 'Hubo un fallo al guardar su empresa'});
+            return;
+        }
+
+        onResetForm();
+        SuccessAlert({text: empresaRes.message});
+        // console.log(empresaRes);
     }
 
   return (

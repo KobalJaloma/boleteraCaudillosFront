@@ -51,6 +51,7 @@ export const Usuarios = () => {
       ErrorAlert({text: "Seleccione Los Campos Necesarios"})
       return;
     }
+
     const paylaod = {
       permiso: permiso.id,
       idUsuario: user.id
@@ -63,6 +64,7 @@ export const Usuarios = () => {
       return;
     }
     console.log({user: user, permiso: permiso});
+    onResetForm();
     SuccessAlert({text: data.message});
     
   }

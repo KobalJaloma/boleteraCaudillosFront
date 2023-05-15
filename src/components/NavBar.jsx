@@ -6,11 +6,25 @@ export const NavBar = React.memo(() => {
 
     const { logout, user} = useContext(AuthContext);
 
-    const restrict = () => {
+    const restrict = (modulo = '') => {
         //PERMISO 1 ES ADMIN
-        console.log(user);
         if(user.permiso == 1) {
             return false
+        }
+        if(user.permiso == 2) {
+           if(modulo == 'reportes') {
+                return false;
+           }
+        }
+        if(user.permiso == 3) {
+            if(modulo == 'creacion' || modulo == 'creacionEventos') {
+                return false;
+            }
+        }
+        if(user.permiso == 4) {
+            if(modulo == 'venta') {
+                return false
+            }
         }
         return true
     }
@@ -32,17 +46,26 @@ export const NavBar = React.memo(() => {
                     <NavLink className='nav-item nav-link' to='/escanear'>
                         Escanear
                     </NavLink>
-                    
-                    <li className="nav-item dropdown" hidden={restrict()}>
+                    <NavLink className='nav-item nav-link' to='/estadisticas' hidden={restrict('estadisticas')} >
+                        Estadisticas
+                    </NavLink>
+                    <NavLink className='nav-item nav-link' to='/puntoVenta' hidden={restrict('venta')} >
+                        Venta
+                    </NavLink>
+
+                    <li className="nav-item dropdown" hidden={restrict('cortesias')}>
                         <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tickets
+                        Cortesias
                         </a>
                         <ul className="dropdown-menu">
-                            <NavLink className="dropdown-item text-black" to="/tickets" style={{background: "white"}}>Generar Tickets</NavLink>
-                            <NavLink className="dropdown-item text-black" to="/enviarTickets" style={{background: "white"}}>Enviar Tickets</NavLink>
+                            <li><h6 className="ms-2 text-p  rimary">Cortesias</h6></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <NavLink className="dropdown-item text-black" to="/tickets" style={{background: "white"}}>Generar Cortesias</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/enviarTickets" style={{background: "white"}}>Enviar Cortesias</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/reportes" style={{background: "white"}}>Crear PDF</NavLink>
                         </ul>
                     </li>
-                    <li className="nav-item dropdown" hidden={restrict()}>
+                    <li className="nav-item dropdown" hidden={restrict('reportes')}>
                         <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Reportes
                         </a>
@@ -51,21 +74,30 @@ export const NavBar = React.memo(() => {
                             <li><hr className="dropdown-divider" /></li>
                             <NavLink className="dropdown-item text-black" to="/reporteTickets" style={{background: "white"}}>Reporte De Tickets</NavLink>
                             <NavLink className="dropdown-item text-black" to="/reporteEscaneo" style={{background: "white"}}>Reporte De Escaneos</NavLink>
-                            <NavLink className="dropdown-item text-black" to="/reportes" style={{background: "white"}}>Recintos</NavLink>
                             <li><hr className="dropdown-divider" /></li>
                         </ul>
                     </li>
-                    <li className="nav-item dropdown" hidden={restrict()}>
+                    <li className="nav-item dropdown" hidden={restrict('creacion')}>
                         <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Administracion
                         </a>
                         <ul className="dropdown-menu">
                             <li><h6 className="ms-2 text-primary">Creacion</h6></li>
                             <li><hr className="dropdown-divider" /></li>
-                            <NavLink className="dropdown-item text-black" to="/CreacionEventos" style={{background: "white"}}>Eventos</NavLink>
-                            <NavLink className="dropdown-item text-black" to="/CreacionRecintos" style={{background: "white"}}>Recintos</NavLink>
-                            <NavLink className="dropdown-item text-black" to="/CreacionEmpresas" style={{background: "white"}}>Empresas</NavLink>
-                            <NavLink className="dropdown-item text-black" to="/usuarios" style={{background: "white"}}>Usuarios</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/CreacionEventos" hidden={restrict('creacionEventos')} style={{background: "white"}}>Eventos</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/CreacionRecintos" style={{background: "white"}} hidden={restrict('creacion-admin')}>Recintos</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/CreacionEmpresas" style={{background: "white"}} hidden={restrict('creacion-admin')}>Empresas</NavLink>
+                            <NavLink className="dropdown-item text-black" to="/usuarios" style={{background: "white"}} hidden={restrict('creacion-admin')}>Usuarios</NavLink>
+                        </ul>
+                    </li>
+                    <li className="nav-item dropdown" hidden={restrict('Planos')}>
+                        <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Planos
+                        </a>
+                        <ul className="dropdown-menu">
+                            <li><h6 className="ms-2 text-primary">Planos</h6></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <NavLink className="dropdown-item text-black" to="/CreacionPlanos" style={{background: "white"}}>Crear Plano</NavLink>
                         </ul>
                     </li>
                 </ul>

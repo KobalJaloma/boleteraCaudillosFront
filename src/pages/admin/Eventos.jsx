@@ -7,18 +7,21 @@ const env = import.meta.env;
 
 const uri = {
     recintos: `${env.VITE_REACT_API_ROUTE}api/recintos`,
-    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos`
+    eventos: `${env.VITE_REACT_API_ROUTE}api/eventos`,
+empresas: `${env.VITE_REACT_API_ROUTE}api/empresas?atributos=id,nombre` 
 }
 
 export const Eventos = () => {
     
-    const {formState, onInputChange, onResetForm, recinto, evento, hora, fecha} = useForm({
+    const {formState, onInputChange, onResetForm, recinto, evento, hora, fecha, empresa} = useForm({
         evento: "",
         hora: "",
         fecha: "",
-        recinto: {}
+        recinto: {},
+        empresa: {}
     });
     const { data } = useAxios(uri.recintos, "get");
+    const empresas = useAxios(uri.empresas, 'get');
 
     const saveEvento = async() => {
         if(recinto == "" || evento == "" || hora == "" || fecha == "") {
@@ -32,10 +35,13 @@ export const Eventos = () => {
 
         const payload = {
             nombre: evento,
-            fechaHora: `${fecha} ${hora}`,
+            fechaHora: `${fecha} ${hora+':00'}`,
             fk_recinto: recinto.id,
+            fk_empresa: empresa.id,
             estatus: 1
         }
+
+        console.log(payload);
         const datos = await newPost(uri.eventos, payload);
 
         if(datos.estatus != "OK") {
@@ -109,7 +115,7 @@ export const Eventos = () => {
                         <div className='col-6 col-md-12 mb-4'>
                             <div className='container input-group'>
                             <ModalTableFilter
-                                titulo="Registros"
+                                titulo="Recintos"
                                 target='m_recintos'
                                 registros={data}
                                 toDo={()=> {console.log('Todo click in recintos')}}
@@ -128,6 +134,33 @@ export const Eventos = () => {
                                 placeholder='Recinto'
                                 name='recinto'
                                 value={recinto.nombre}
+                                onChange={onInputChange}
+                                disabled
+                            />
+                            </div>
+                        </div>
+                        <div className='col-6 col-md-12 mb-4'>
+                            <div className='container input-group'>
+                            <ModalTableFilter
+                                titulo="Empresas"
+                                target='m_empresas'
+                                registros={empresas.data}
+                                toDo={()=> {console.log('Todo click in empresas')}}
+                                onClickRow={(registro)=> {onInputChange({
+                                    target: {
+                                        name: "empresa",
+                                        value: registro
+                                    }
+                                }); console.log(formState)}}
+                                config={{
+                                    buttonColor: "primary",
+                                }}
+                            />
+                            <input 
+                                className='form-control'
+                                placeholder='Empresa'
+                                name='empresa'
+                                value={empresa.nombre}
                                 onChange={onInputChange}
                                 disabled
                             />

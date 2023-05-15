@@ -19,10 +19,10 @@ export const AuthProvider = ({children}) => {
     const [authState, dispatch] = useReducer(authReducer, {});
     
     //extraer usuarios
-    const { data } = useAxios(url);
+    const { data, refreshData } = useAxios(url);
     
     const login = async(nombre = '', password = '') => {
-        
+        await refreshData();
         // veridicacion de existencias de usuarios
         const datos = await data;
         const usuario = datos.find(({nombreUsuario}) => nombre === nombreUsuario);

@@ -24,12 +24,80 @@
 }
 
 .gradient-bg-animation{
-    height:200px;
+    height:100%;
     background: rgb(189, 189, 189);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(2, 33, 192) 0%, rgb(89, 51, 165) 48%, #1CB5E0 100%);
     background-size: 300% 100%;
     animation: gradient 15s ease infinite;
 }
+
+.gradient-bg-animation-calido{
+    height:100%;
+    background: rgb(189, 189, 189);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(255, 113, 81) 0%, rgb(234, 255, 0) 48%, #1CB5E0 100%);
+    background-size: 300% 100%;
+    animation: gradient 15s ease infinite;
+}
+
+
+
+/* PLANOS */
+.gs-panel-menu {
+    transition: 1s ease, background 0.5s ease;
+}
+
+
+/* CARGANDO ESTILOS */
+
+    #contenedor{ 
+    background-color: #00b8de; 
+    display: grid;
+    place-content: center;
+    height: 100%;
+    color: #000;
+  }
+  .cargando{ 
+    position: relative; 
+    color: #FFF;
+    margin-top: 2em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase
+  }
+  
+  .contenedor-loader{  
+       width: 180px;
+      height: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 0 auto; 
+  }
+  .contenedor-loader div{ 
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    animation: salto 1s alternate
+      infinite;
+  }
+  .contenedor-loader div:nth-child(2){ 
+    animation-delay: 0.20s; 
+  }
+  .contenedor-loader div:nth-child(3){ 
+    animation-delay: 0.40s; 
+  }
+  .contenedor-loader div:nth-child(4){ 
+    animation-delay: 0.60s; 
+  }
+  @keyframes salto {
+      from {
+          opacity: 1;
+      }
+      to{
+           opacity: 0;
+      }
+  }
+
 
 
 /* ANIMACIONES */
@@ -43,4 +111,110 @@
     100% {
         background-position: 0% 50%;
     }
+}
+
+
+/* FIGURAS */
+.cuadrado {
+    width: 100px; 
+    height: 100px; 
+    background: #428bca;
+}
+.rombo {
+    width: 100px; 
+    height: 100px; 
+    border: 3px solid #555; 
+    background: #428bca;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.rombo-2 {
+    width: 100px; 
+    height: 100px; 
+    border: 3px solid #555; 
+    background: #428bca;
+    -webkit-transform: rotate(45deg) skew(15deg, 15deg);
+    -moz-transform: rotate(45deg) skew(15deg, 15deg);
+    -ms-transform: rotate(45deg) skew(15deg, 15deg);
+    -o-transform: rotate(45deg) skew(15deg, 15deg);
+    transform: rotate(45deg) skew(15deg, 15deg);
+}
+
+.paralelogramo {
+    width: 150px; 
+    height: 100px; 
+    border: 3px solid #555; 
+    background: #428bca;
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -ms-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    transform: skew(20deg);
+}
+
+.trapecio {
+    width: 250px;
+    height: 0px;
+    border-right: 60px solid transparent;
+    border-left: 60px solid transparent;
+    border-bottom: 100px solid #428bca;
+}
+.triangulo {
+    width: 0; 
+    height: 0; 
+    border-left: 100px solid #f0ad4e;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent; 
+}
+.triangulo-equilatero {
+    width: 0;
+    height: 0;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-left: 50px solid #f0ad4e;
+    border-bottom: 50px solid #f0ad4e;
+}
+
+.triangulo-isoseles {
+    width: 0;
+    height: 0;
+    border-right: 100px solid transparent;
+    border-top: 100px solid transparent;
+    border-left: 100px solid transparent;
+    border-bottom: 100px solid #f0ad4e;
+}
+
+.circulo {
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.oval {
+    width: 250px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.cuarto-circulo {
+    width: 100px; 
+    height: 100px; 
+    border: 2px solid #555; 
+    -moz-border-radius: 0 100% 0 0;
+    -webkit-border-radius: 0 100% 0 0;
+    border-radius: 0 100% 0 0;
+}
+.semi-circulo {
+    width: 100px; 
+    height: 50px; 
+    border: 2px solid #555; 
+    -moz-border-radius: 100px 100px 0 0;
+    -webkit-border-radius: 100px 100px 0 0;
+    border-radius: 100px 100px 0 0;
 }

@@ -63,7 +63,7 @@ export const Recintos = () => {
             ErrorAlert({text: data.message});
             return null;
         }
-
+        onResetForm();
         SuccessAlert({text: data.message});
     }
 

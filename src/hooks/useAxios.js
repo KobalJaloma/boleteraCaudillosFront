@@ -22,6 +22,11 @@ export const useAxios = ( url, type = "get") => {
         });
     };
 
+    const refreshData = async() => {
+        await getData();
+        console.log('Se actualizaron los datos');
+    }
+
     useEffect(() => {
         getData();
         console.log(url);
@@ -29,6 +34,7 @@ export const useAxios = ( url, type = "get") => {
 
     return({
         data: state.data,
-        isLoading: state.isLoading
+        isLoading: state.isLoading, 
+        refreshData
     });
 }

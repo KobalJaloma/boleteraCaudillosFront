@@ -37,8 +37,9 @@ export const Escanear = () => {
     const payloadTicket = {
       codigo: idTicket
     }
-    const ticket = await newPost(uri.ticket, payloadTicket);
-
+    console.log(payloadTicket);
+    const ticket = await newGet(`${uri.ticket}?codigo=${payloadTicket.codigo}`);
+    console.log(ticket);
     //evaluar estados del ticket y de la peticion
     if(ticket == '') {
       ErrorAlertShortTime({text: 'No se pudo obtener la informacion del ticket, puede ser debido a la inexistencia del mismo, o un error de sistema, intente de nuevo'});      

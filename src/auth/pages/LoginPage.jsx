@@ -94,6 +94,8 @@ export const LoginPage = () => {
                     onClick={()=> sesion(username, password)}
                   > Login</button>
                 </div>
+
+                {/* USUARIOS PROVISIONALES */}
                 <div className='mb-3 d-flex justify-content-center' style={{alignSelf: 'center', width: '100%'}}>
                   {/* <ModalTicket /> */}
                   
@@ -111,6 +113,7 @@ export const LoginPage = () => {
                   {/* <button type='button' className='btn btn-dark px-5'
                     onClick={() => {}}
                   > <i class="bi bi-qr-code"></i></button> */}
+
                   {/* PARCHE PARA USAURIOS */}
                   <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('4')} type="button">Usuario 4</button>
                   <button className='btn btn-warning mx-1' onClick={() => cambiarUsuario('5')} type="button">Usuario 5</button>
